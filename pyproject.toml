@@ -1,0 +1,67 @@
+[tool.poetry]
+name = "text-to-image-diffussion-model"
+version = "0.1.0"
+description = "Produce images from text input"
+authors = ["Mihai Dumitrescu <mihaidumitrescujee@gmail.com>"]
+license = "MIT"
+packages = [
+    { from = "src", include = "utils" }  # optional if you want tests installable
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10, <3.11"
+
+pandas="2.3.3"
+jupyter = ">=1.0,<2.0"
+numpy = ">=1.23,<2.0"
+matplotlib = ">=3.7,<4.0"
+
+kaggle = "1.5.16"
+kagglehub = "<0.4.0"
+
+loguru = "0.7.3"
+
+
+# Diffusion stack
+# HuggingFace stack
+transformers = ">=4.40,<5.0"
+accelerate = ">=0.28,<1.0"
+safetensors = ">=0.4,<1.0"
+
+# Diffusion (NO torch extra)
+diffusers = { version =">=0.27,<1.0"}
+
+# PyTorch (CUDA 12.8)
+torch = { version = "2.7.1", source = "pytorch-cu128" }
+torchvision = { version = "0.22.1", source = "pytorch-cu128" }
+torchaudio = { version = "2.7.1", source = "pytorch-cu128" }
+
+Pillow = "^10.0"
+
+
+
+
+[tool.group.dev.dependencies]
+# Optional: linters, testing
+black = ">=23,<25"
+pytest = ">=7,<9"
+sphinx-rtd-theme = "^1.3.0"
+sphinx-simplepdf = "^1.6.0"
+pydantic = "^2.3.0"
+
+[tool.pytest.ini_options]
+# Where pytest should look for tests
+testpaths = ["tests"]
+python_files = ["*_test.py", "*_test_cases.py"]
+
+[tool.black]
+line-length = 120
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[[tool.poetry.source]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+priority = "explicit"
