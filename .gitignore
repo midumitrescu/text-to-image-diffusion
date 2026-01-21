@@ -195,3 +195,5 @@ cython_debug/
 .pypirc
 
 *.egg-info
+img_align_celeba/
+celeba-dataset.zip
