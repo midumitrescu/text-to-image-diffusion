@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 
-from utils.image_utils import load_image, show_image, ensure_correct_dimensions
+from data_loading.image_utils import load_image, show_image, ensure_correct_dimensions
 
 BASE_DIR = Path(__file__).resolve().parent
 images_folder_for_tests = os.path.join(BASE_DIR, "data")

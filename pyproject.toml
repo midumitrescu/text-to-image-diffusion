@@ -20,13 +20,15 @@ kaggle = "1.5.16"
 kagglehub = "<0.4.0"
 
 loguru = "0.7.3"
-
+tqdm = "4.67.1"
 
 # Diffusion stack
 # HuggingFace stack
 transformers = ">=4.40,<5.0"
 accelerate = ">=0.28,<1.0"
 safetensors = ">=0.4,<1.0"
+albumentations = "2.0.8"
+
 
 # Diffusion (NO torch extra)
 diffusers = { version =">=0.27,<1.0"}
@@ -37,6 +39,8 @@ torchvision = { version = "0.22.1", source = "pytorch-cu128" }
 torchaudio = { version = "2.7.1", source = "pytorch-cu128" }
 
 Pillow = "^10.0"
+fastapi = "^0.128.0"
+python-multipart = "^0.0.21"
 
 
 
@@ -50,7 +54,6 @@ sphinx-simplepdf = "^1.6.0"
 pydantic = "^2.3.0"
 
 [tool.pytest.ini_options]
-# Where pytest should look for tests
 testpaths = ["tests"]
 python_files = ["*_test.py", "*_test_cases.py"]
 
