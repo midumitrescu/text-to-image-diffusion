@@ -155,5 +155,12 @@ A more detailed analysis on means, distribution of values, first 3 statististica
 3. **Install dependencies**
    
    ```bash
-       
+        poetry install
    ```
+   
+4. **Run tests**
+   
+   ```bash
+        poetry install
+   ```
+
