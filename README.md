@@ -54,13 +54,14 @@ Most of the inspiration I have found on this [Youtube video](youtube.com/watch?v
               +--------------------------> Reconstruction / Sampled Output
                                                       |
                                                       v
-                                                 +------------------+
-                                                 |  Generated Image |
-                                                 | (or sequence)    |
-                                                 +------------------+
+                                             +------------------+
+                                             |  Generated Image |
+                                             | (or sequence)    |
+                                             +------------------+
 
 
-The idea of this approach is to:
+## Main ideas
+
 1. Take a text, encode it, pass it though an attention and a conditional variational autoencoder module to produce a conditioned latent probability distribution.
 2. This probability distribution is then used as initialization of our denoising model.
 3. The denoising model learns to sequentially denoise an image to produce sharp, realistic images that resemble qualitative picture, available on the internet.
