@@ -188,7 +188,8 @@ A more detailed analysis on means, distribution of values, first 3 statististica
   poetry run pytest
 ```
 
-
+## Docker
+Is still in TODO and will be my next task.
 
 
 ```bash
