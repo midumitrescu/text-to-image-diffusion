@@ -86,3 +86,19 @@ The project is based on a large number of publicly available face pictures of ce
 
 A more detailed analysis on means, distribution of values, first 3 statististical moments, examples, etc, can be found in the
 [Exploratory Data Analysis Notebook](Exploratory_Data_Analysis.ipynb).
+
+## Technology Stack
+
+### Data Science & ML
+- **Python**: 3.10
+- **Data Processing**: pandas, numpym pytorch
+- **Visualization**: matplotlib
+- **ML Models**: transformers, diffusers, xgboost
+- **Testing**: pytest (unit and integration tests)
+- **Notebook Environment**: Jupyter
+
+### Deployment
+- **API Framework**: FastAPI
+- **Containerization**: Docker (still coming :)
+- **Package Management**: poetry
+- **Environment Management**: miniconda
