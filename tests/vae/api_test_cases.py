@@ -1,17 +1,16 @@
-import unittest
-
 import io
+import unittest
 from pathlib import Path
 
-from fastapi.testclient import TestClient
-from PIL import Image
 import matplotlib.pyplot as plt
 import torch
-import numpy as np
-
-from data_loading.image_utils import load_image, show_image, transformer_from_rgb_format, to_rgb_format, from_rgb_format
+from PIL import Image
+from data_loading.image_utils import from_rgb_format
+from fastapi.testclient import TestClient
 from vae.api import app
 from vae.vae_utils import load_vae
+
+from tests.image_loading_test_cases import load_images_for_test
 
 client = TestClient(app)
 
@@ -49,7 +48,7 @@ class VAEApiTestCase(unittest.TestCase):
 
     def test_decoding_works(self):
         vae = load_vae(model_file=None, device="cpu")
-        test_image = load_image("000001.jpg", should_transpose=False)
+        test_image = load_images_for_test("000001.jpg").transpose(1, 2, 0)
         boxed_image = from_rgb_format(test_image, img_size=(128, 128))
         posterior = vae.encode(boxed_image.unsqueeze(0))
         z = posterior.latent_dist.mean

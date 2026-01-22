@@ -1,14 +1,10 @@
-import os
-from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
-
 from pathlib import Path
+
 import albumentations as A
-from albumentations.pytorch import ToTensorV2
-from diffusers import AutoencoderKL
-import torch
+import matplotlib.pyplot as plt
 import numpy as np
+from PIL import Image
+from albumentations.pytorch import ToTensorV2
 
 BASE_DIR = Path(__file__).resolve().parent
 default_images_folder = BASE_DIR.joinpath("..", "..", "img_align_celeba", "img_align_celeba")
