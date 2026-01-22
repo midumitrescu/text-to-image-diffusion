@@ -163,6 +163,20 @@ A more detailed analysis on means, distribution of values, first 3 statististica
    ```bash
         poetry run pytest
    ```
+   
+
+5. Download the dataset either from Kaggle directly or from the [EDA Notebook](Exploratory_Data_Analysis.ipynb), uncomment, and run the first cell.
+   
+   ```bash
+        poetry run pytest
+   ```
+
+6. Train your VAE starting from [stabilityai/sd-vae-ft-mse](https://huggingface.co/stabilityai/sd-vae-ft-mse)
+   
+   ```bash
+        poetry run python -m src.vae.train  --batch_size 8   --validation_ratio 0.2   --learning-rate 0.01   --epochs 20   --save-dir ./models/
+   ```
+
 
 ```bash
   poetry config virtualenvs.create false
@@ -171,9 +185,10 @@ A more detailed analysis on means, distribution of values, first 3 statististica
   conda create -n diffusion python=3.10 -y
   conda activate diffusion
   poetry install --with dev
-  poetry run which pytest
-
+  poetry run pytest
 ```
+
+
 
 
 ```bash
