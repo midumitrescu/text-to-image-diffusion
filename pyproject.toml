@@ -41,8 +41,6 @@ fastapi = "^0.128.0"
 python-multipart = "^0.0.21"
 
 
-
-
 [tool.group.dev.dependencies]
 # Optional: linters, testing
 black = ">=23,<25"
