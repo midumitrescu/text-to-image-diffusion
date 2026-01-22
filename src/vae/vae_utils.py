@@ -21,19 +21,19 @@ class Checkpoint:
         self.folder = folder
         Path(self.folder).mkdir(parents=True, exist_ok=True)
 
-    def step(self, epoch: int, metric=dict, model: torch.nn.Module = None):
+    def step(self, epoch: int, beta: float, metric=dict, model: torch.nn.Module = None):
 
         loss = metric[self.metric_to_use]
         improved = loss < self.best_loss if self.mode == "min" else loss > self.best_loss
         logger.debug("{}: Best MSE = {}, for epoch {}. Current MSE = {} at epoch {}. Improvement? {}", self.experiment_label, self.best_loss, self.best_epoch, loss, epoch, improved)
         if improved:
             self.best_loss = loss
-            torch.save({
-                "model": model.state_dict(),
-                "metric": metric,
-                "epoch": epoch
-
-            }, f"{self.folder}/vae{self.experiment_label}_{epoch}.pt")
+        torch.save({
+            "model": model.state_dict(),
+            "metric": metric,
+            "epoch": epoch,
+            "beta": f"{beta: .6f}",
+        }, f"{self.folder}/vae{self.experiment_label}_{epoch}.pt")
 
 
 def evaluate_vae(vae, val_loader, device=device, return_examples=4):
