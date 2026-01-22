@@ -70,7 +70,7 @@ def train_vae(image_size, epochs, batch_size, lr, model_file=None, beta_slope=0.
             )
         res = evaluate_vae(vae, test_loader, return_examples=0)
         losses.append({k: res[k] for k in ["mean_mse", "mean_kl", "mean"]})
-        model_saver.step(epoch=epoch, metric=res, model=vae)
+        model_saver.step(epoch=epoch, metric=res, model=vae, beta=beta)
 
 
 

@@ -1,9 +1,14 @@
 import io
+from datetime import datetime
+from typing import Literal
 
 import numpy as np
 import torch
 import torchvision.transforms as T
 from PIL import Image
+from accelerate.commands.merge import description
+from pydantic import BaseModel, Field
+
 from data_loading.image_utils import to_rgb_format, from_rgb_format, ensure_correct_dimensions
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from starlette import status
@@ -11,7 +16,13 @@ from starlette.responses import StreamingResponse
 from transformers.image_transforms import to_pil_image
 from vae.train import load_vae
 
-app = FastAPI(title="VAE Downsampling API")
+import uvicorn
+
+service_startup_time = datetime.now()
+app = FastAPI(title="VAE Downsampling API",
+              description="A subcomponent of Text to Image Difusion, used for downsampling to a uniform features space",
+              version="1.0.0",
+              docs_url="/docs")
 
 
 def encode(x):
@@ -98,3 +109,33 @@ async def extract_image_from_http_request(file):
     except Exception:
         raise HTTPException(400, "Invalid image file")
     return image
+
+class HealthResponse(BaseModel):
+    """Health check response."""
+
+    status: Literal["running", "model_not_loaded"] = Field(..., description="Service health status")
+    model_loaded: bool = Field(..., description="Model loaded status")
+    uptime_seconds: float = Field(..., description="Service uptime in seconds")
+    timestamp: str = Field(..., description="Current timestamp")
+
+@app.get("/health",  tags=["monitoring"])
+async def health_check():
+    """
+    Health check endpoint for monitoring service status.
+
+    Returns service health, model status, and uptime information.
+    """
+    uptime = (datetime.now() - service_startup_time).total_seconds()
+
+    return (
+        HealthResponse(
+        status="running" if model is not None else "model_not_loaded",
+        model_loaded=model is not None,
+        uptime_seconds=uptime,
+        timestamp=datetime.now().isoformat(),
+    ))
+
+if __name__ == "__main__":
+    import os
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
