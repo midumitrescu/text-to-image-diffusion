@@ -171,11 +171,19 @@ A more detailed analysis on means, distribution of values, first 3 statististica
         poetry run pytest
    ```
 
-6. Train your VAE starting from [stabilityai/sd-vae-ft-mse](https://huggingface.co/stabilityai/sd-vae-ft-mse)
+6. **Train your VAE starting from [stabilityai/sd-vae-ft-mse](https://huggingface.co/stabilityai/sd-vae-ft-mse)**
    
    ```bash
         poetry run python -m src.vae.train  --batch_size 8   --validation_ratio 0.2   --learning-rate 0.01   --epochs 20   --save-dir ./models/
    ```
+
+
+7. **Build docker image**
+```bash
+docker build --no-cache -t vae-image:1 .
+```
+
+8. **Start docker image locally**
 
 
 ```bash
