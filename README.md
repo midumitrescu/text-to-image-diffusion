@@ -102,3 +102,58 @@ A more detailed analysis on means, distribution of values, first 3 statististica
 - **Containerization**: Docker (still coming :)
 - **Package Management**: poetry
 - **Environment Management**: miniconda
+
+## Getting Started
+
+### Prerequisites
+
+1. **Python 3.10+**
+   ```bash
+   python --version 
+   ```
+
+2. **Conda (via Miniconda)**
+   ### Linux / macOS
+   ```bash
+      curl -LO https://repo.anaconda.com/miniconda/Miniconda3-latest-$(uname)-x86_64.sh
+      bash Miniconda3-latest-$(uname)-x86_64.sh
+   ```
+   ### Apple Silicon
+   ```bash
+       curl -LO https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh
+       bash Miniconda3-latest-MacOSX-arm64.sh
+   ```
+
+
+
+3**Poetry Package Manager**
+   ```bash
+   curl -sSL https://install.python-poetry.org | python3 -
+   ```
+
+4**Kaggle API Credentials (Optional)**
+  - Create an account at [kaggle.com](https://www.kaggle.com)
+  - Go to Account settings → API → Create New Token
+  - Place the downloaded `kaggle.json` in `~/.kaggle/`
+  - Set permissions: `chmod 600 ~/.kaggle/kaggle.json`
+
+## How to install?
+
+1. **Clone the repository**
+   ```bash
+   git clone git@github.com:midumitrescu/text-to-image-diffusion.git
+   cd text-to-image-diffusion
+   ```
+
+2. **Create conda environment**
+   
+   ```bash
+       conda create -n diffusion python=3.10 -y
+       conda activate diffusion
+   ```
+   
+3. **Install dependencies**
+   
+   ```bash
+       
+   ```

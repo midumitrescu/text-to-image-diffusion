@@ -197,3 +197,4 @@ cython_debug/
 *.egg-info
 img_align_celeba/
 celeba-dataset.zip
+poetry.lock
