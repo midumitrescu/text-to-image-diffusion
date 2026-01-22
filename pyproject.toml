@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "Produce images from text input"
 authors = ["Mihai Dumitrescu <mihaidumitrescujee@gmail.com>"]
 license = "MIT"
-package-mode = false
+packages = [
+    { from = "src", include = "data_loading"},
+    { from = "src", include = "vae"},
+]
 
 [tool.poetry.dependencies]
 python = ">=3.10, <3.11"
@@ -51,6 +54,7 @@ pydantic = "^2.3.0"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
 python_files = ["*_test.py", "*_test_cases.py"]
 
 [tool.black]
