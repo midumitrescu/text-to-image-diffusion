@@ -4,9 +4,6 @@ version = "0.1.0"
 description = "Produce images from text input"
 authors = ["Mihai Dumitrescu <mihaidumitrescujee@gmail.com>"]
 license = "MIT"
-packages = [
-    { from = "src", include = "utils" }  # optional if you want tests installable
-]
 
 [tool.poetry.dependencies]
 python = ">=3.10, <3.11"
