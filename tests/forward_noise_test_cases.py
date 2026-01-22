@@ -4,7 +4,7 @@ import torch
 
 
 from tests.matplotlib_test_utils import show_plot_non_blocking
-from utils.image_utils import show_image
+from data_loading.image_utils import show_image
 
 
 class GaussianNoiseGenerationTestCase(unittest.TestCase):
