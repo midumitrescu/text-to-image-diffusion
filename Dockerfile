@@ -7,6 +7,9 @@ ENV PATH="$POETRY_HOME/bin:$PATH"
 
 WORKDIR /app
 COPY models src pyproject.toml poetry.lock ./
+COPY models ./models/
+COPY src ./src/
+COPY pyproject.toml poetry.lock ./
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends build-essential curl && \
