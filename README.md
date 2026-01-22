@@ -185,6 +185,10 @@ docker build --no-cache -t vae-image:1 .
 
 8. **Start docker image locally**
 
+```bash
+docker run -p 8000:8000 vae-image:1
+```
+
 
 ```bash
   poetry config virtualenvs.create false
