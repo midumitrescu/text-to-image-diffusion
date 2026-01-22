@@ -11,6 +11,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = ">=3.10, <3.11"
+pytest = ">=7,<9"
 
 pandas="2.3.3"
 jupyter = ">=1.0,<2.0"
@@ -44,7 +45,7 @@ fastapi = "^0.128.0"
 python-multipart = "^0.0.21"
 
 
-[tool.group.dev.dependencies]
+[tool.poetry.group.dev.dependencies]
 # Optional: linters, testing
 black = ">=23,<25"
 pytest = ">=7,<9"

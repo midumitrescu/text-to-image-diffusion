@@ -161,6 +161,24 @@ A more detailed analysis on means, distribution of values, first 3 statististica
 4. **Run tests**
    
    ```bash
-        poetry install
+        poetry run pytest
    ```
 
+```bash
+  poetry config virtualenvs.create false
+  git clone git@github.com:midumitrescu/text-to-image-diffusion.git
+  cd text-to-image-diffusion
+  conda create -n diffusion python=3.10 -y
+  conda activate diffusion
+  poetry install --with dev
+  poetry run which pytest
+
+```
+
+
+```bash
+cd ..
+conda deactivate
+conda remove --name diffusion --all -y
+rm -rf text-to-image-diffusion/
+```
