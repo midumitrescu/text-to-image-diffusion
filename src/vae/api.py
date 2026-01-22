@@ -1,16 +1,15 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.responses import Response
-from PIL import Image
 import io
+
+import numpy as np
 import torch
 import torchvision.transforms as T
+from PIL import Image
+from data_loading.image_utils import to_rgb_format, from_rgb_format, ensure_correct_dimensions
+from fastapi import FastAPI, File, UploadFile, HTTPException
 from starlette import status
 from starlette.responses import StreamingResponse
 from transformers.image_transforms import to_pil_image
-
-from data_loading.image_utils import to_rgb_format, from_rgb_format, show_image, ensure_correct_dimensions
 from vae.train import load_vae
-import numpy as np
 
 app = FastAPI(title="VAE Downsampling API")
 

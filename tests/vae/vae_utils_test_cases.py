@@ -1,6 +1,7 @@
 import unittest
 
 from data_loading.image_utils import transformer_from_rgb_format, to_rgb_format, show_image, from_rgb_format
+
 from tests.image_loading_test_cases import load_images_for_test
 
 test_image = load_images_for_test("000001.jpg")

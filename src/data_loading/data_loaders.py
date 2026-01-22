@@ -1,30 +1,12 @@
-import albumentations as A
-from albumentations.pytorch import ToTensorV2
-from diffusers import AutoencoderKL
-import torch
-import numpy as np
-from torchvision.datasets import ImageFolder
-from torchvision import datasets, transforms
-from torchvision.datasets import ImageFolder
-from torch.utils.data import DataLoader, random_split
-import os
-import matplotlib.image as mpimg
-from PIL import Image
-import torch
-import numpy as np
-import matplotlib.pyplot as plt
-from diffusers.utils import make_image_grid
-import torch.nn.functional as F
-import torchvision.models as models
-import torch.nn as nn
-import pandas as pd
-import albumentations as A
-from albumentations.pytorch import ToTensorV2
 import json
-from pathlib import Path
 import random
+from pathlib import Path
 
+import albumentations as A
+import numpy as np
 from data_loading.image_utils import transformer_from_rgb_format
+from torch.utils.data import DataLoader, random_split
+from torchvision.datasets import ImageFolder
 
 default_images_dir = "celeba-dataset-short/img_align_celeba"
 default_label_file = "text_labels.json"

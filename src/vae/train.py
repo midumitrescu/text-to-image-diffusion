@@ -4,11 +4,10 @@ from pathlib import Path
 import numpy as np
 import torch
 from accelerate import Accelerator
+from data_loading.data_loaders import load_data
 from diffusers.optimization import get_cosine_schedule_with_warmup
 from loguru import logger
 from tqdm import tqdm
-
-from data_loading.data_loaders import load_data
 from vae.vae_utils import evaluate_vae, Checkpoint, load_vae
 
 training_device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

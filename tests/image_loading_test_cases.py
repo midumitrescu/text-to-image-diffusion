@@ -37,10 +37,10 @@ class ImageLoadingTestCases(unittest.TestCase):
 
     def test_make_sure_T_operator_reversed_before_show(self):
         image_name = "000001.jpg"
-        img = Image.open(f"{BASE_DIR}/../img_align_celeba/img_align_celeba/{image_name}")
+        img = Image.open( BASE_DIR.joinpath("data", image_name))
         original_array = np.array(img)
 
-        object_under_test = load_image(image_name)
+        object_under_test = load_images_for_test(image_name)
 
         self.assertEqual(original_array.shape, (218, 178, 3))
         self.assertEqual(object_under_test.shape, (3, 218, 178))
@@ -48,8 +48,9 @@ class ImageLoadingTestCases(unittest.TestCase):
 
     @staticmethod
     def test_image_loads_correctly():
-        for weird_file in ["121959.jpg", "053492.jpg", "106818.jpg"]:
-            img = Image.open(f"{BASE_DIR}/../img_align_celeba/img_align_celeba/{weird_file}")
+        files_shows_weirdly_in_jupyter_notebook = ["121959.jpg", "053492.jpg", "106818.jpg"]
+        for weird_file in files_shows_weirdly_in_jupyter_notebook:
+            img = Image.open( BASE_DIR.joinpath("data", weird_file))
             plt.imshow(img)
             plt.show()
             plt.close("all")
