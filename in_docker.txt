@@ -1,0 +1,19 @@
+docker cp models/ c2649010bcaa:/app/models/
+docker cp src/ c2649010bcaa:/app/src/
+docker cp pyproject.toml c2649010bcaa:/app/pyproject.toml
+docker cp poetry.lock c2649010bcaa:/app/poetry.lock
+
+export POETRY_HOME="/opt/poetry"
+export PATH="$POETRY_HOME/bin:$PATH"
+apt-get update && \
+apt-get install -y --no-install-recommends build-essential curl && \
+apt-get clean && \
+curl -sSL https://install.python-poetry.org | python3 - && \
+poetry install && \
+useradd -m -u 1000 apirunner && \
+mkdir -p /app /app/models && \
+chown -R apirunner:apirunner /app && \
+rm -rf /root/.cache/pypoetry/* /root/.cache/pip/*
+
+
+poetry run python -m vae.api --host 127.0.0.1 --port 8000
