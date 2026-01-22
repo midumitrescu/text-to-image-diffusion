@@ -4,10 +4,11 @@ from pathlib import Path
 import numpy as np
 import torch
 from accelerate import Accelerator
-from data_loading.data_loaders import load_data
 from diffusers.optimization import get_cosine_schedule_with_warmup
 from loguru import logger
 from tqdm import tqdm
+
+from data_loading.data_loaders import load_data
 from vae.vae_utils import evaluate_vae, Checkpoint, load_vae
 
 training_device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -15,10 +16,15 @@ training_device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 def load_vae_for_training(model_file: Path):
     return load_vae(model_file, device=training_device)
 
-def train_vae(image_size, epochs, batch_size, lr, model_file=None, beta_slope=0.01, validation_ratio=0.2):
+testing = False
+
+dataset_location = Path(__file__).parent.resolve().joinpath("..", "..", "celeba-dataset-short", "img_align_celeba") if testing else Path(__file__).parent.resolve().joinpath("..", "..", "img_align_celeba")
+
+def train_vae(image_size, epochs, batch_size, lr, model_file=None, beta_slope=0.01, validation_ratio=0.2, save_dir = "../../models/"):
 
     vae = load_vae_for_training(model_file)
-    train_loader, test_loader = load_data(image_size, batch_size, center_mean=True, train_ratio=(1-validation_ratio), text_labels=False, images_dir=Path(__file__).parent.resolve().joinpath("..", "..", "img_align_celeba"))
+
+    train_loader, test_loader = load_data(image_size, batch_size, center_mean=True, train_ratio=(1-validation_ratio), text_labels=False, images_dir=dataset_location)
 
     optimizer = torch.optim.AdamW(vae.parameters(), lr=lr, weight_decay=1e-3)
 
@@ -36,7 +42,7 @@ def train_vae(image_size, epochs, batch_size, lr, model_file=None, beta_slope=0.
 
 
     initial_metric = evaluate_vae(vae, test_loader, return_examples=2)
-    model_saver = Checkpoint(init_metric=initial_metric, metric_to_use="mean_mse")
+    model_saver = Checkpoint(init_metric=initial_metric, metric_to_use="mean_mse", folder=save_dir)
     losses = []
 
     for epoch in range(epochs):
@@ -78,13 +84,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--img_size', '-i', type=tuple, default=(128, 128), help='The input image size in the VAE')
     parser.add_argument('--batch_size', '-b', type=int, default=5, help='Training and validation batch size')
-    parser.add_argument('--validation_ratio', '-val', type=float, default=5, help='How much of the dataset should we use as validation?')
+    parser.add_argument('--validation_ratio', '-val', type=float, default=0.2, help='How much of the dataset should we use as validation?')
 
     parser.add_argument('--learning-rate', '-lr', type=float, default=0.01, help='Training and validation batch size')
     parser.add_argument('--epochs', '-e', type=int, default=10, help='Number of epochs')
 
-    parser.add_argument('--save-dir', '-s', type=str, default='./save/', help='Directory to save checkpoints')
+    parser.add_argument('--save-dir', '-s', type=str, default='./models/', help='Directory to save checkpoints')
 
     args = parser.parse_args()
 
-    train_vae(image_size=args.img_size, epochs=args.epochs, batch_size=args.batch_size, lr=args.learning_rate, validation_ratio=args.validation_ratio)
+    assert 0.5 > args.validation_ratio > 0
+
+    train_vae(image_size=args.img_size, epochs=args.epochs, batch_size=args.batch_size, lr=args.learning_rate, validation_ratio=args.validation_ratio, save_dir=args.save_dir)

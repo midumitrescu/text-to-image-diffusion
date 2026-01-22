@@ -8,7 +8,8 @@ from loguru import logger
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 class Checkpoint:
-    def __init__(self, folder="models/", mode="min", init_metric: dict = None, metric_to_use = "mean_mse", experiment_label=None):
+    def __init__(self, folder, mode="min", init_metric: dict = None, metric_to_use = "mean_mse", experiment_label=None):
+
         self.experiment_label = "" if experiment_label is None else f"_{experiment_label}"
 
         self.metric_to_use = metric_to_use

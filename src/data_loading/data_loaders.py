@@ -8,7 +8,7 @@ from data_loading.image_utils import transformer_from_rgb_format
 from torch.utils.data import DataLoader, random_split
 from torchvision.datasets import ImageFolder
 
-default_images_dir = "celeba-dataset-short/img_align_celeba"
+default_images_dir = "img_align_celeba"
 default_label_file = "text_labels.json"
 
 BASE_DIR = Path(__file__).resolve().parent
