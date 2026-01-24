@@ -137,6 +137,9 @@ A more detailed analysis on means, distribution of values, first 3 statististica
   - Place the downloaded `kaggle.json` in `~/.kaggle/`
   - Set permissions: `chmod 600 ~/.kaggle/kaggle.json`
 
+5. **Docker**
+6. **Docker Compose**
+
 ## How to install?
 
 1. **Clone the repository**

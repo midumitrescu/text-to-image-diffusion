@@ -1,0 +1,10 @@
+services:
+  vae:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      no_cache: true
+    image: vae-image:${VAE_VERSION:-debug}
+    ports:
+      - "8000:8000"
+

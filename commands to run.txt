@@ -3,3 +3,21 @@ conda activate text-to-image-diffusion
 curl -sSL https://install.python-poetry.org | python3 -
 poetry config virtualenvs.create false
 poetry install
+
+
+terraform --version
+bash: terraform: command not found...
+sudo dnf install -y dnf-plugins-core
+
+
+
+sudo dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+sudo dnf config-manager --add-repo \
+  https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+
+sudo dnf install -y terraform
+
+# terraform installed. We require to setup AWS.
+aws configure
+
+# setup terraform
