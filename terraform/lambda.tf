@@ -14,8 +14,6 @@ locals {
 
 resource "aws_lambda_function" "vae" {
 
-  #depends_on = [aws_iam_policy.devs_assume_lambda_role]
-
   provider = aws.create-lambda
   function_name = "vae-docker-container-lambda"
   role          = aws_iam_role.lambda_execution.arn
@@ -90,7 +88,7 @@ resource "aws_api_gateway_usage_plan_key" "key_attach" {
   usage_plan_id = aws_api_gateway_usage_plan.plan.id
 }
 
-resource "aws_lambda_permission" "apigw" {
+resource "aws_lambda_permission" "api_gateway" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.vae.function_name

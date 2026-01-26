@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "TestCreateUsers",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreatePolicy",
+        "iam:CreateRole",
+        "iam:GetPolicy",
+        "iam:GetRole",
+        "iam:GetGroupPolicy",
+        "iam:GetPolicyVersion",
+        "iam:ListRolePolicies",
+        "iam:ListAttachedRolePolicies",
+        "iam:ListPolicyVersions",
+        "iam:ListInstanceProfilesForRole",
+        "iam:AttachRolePolicy",
+        "iam:PutGroupPolicy",
+        "iam:DetachRolePolicy",
+        "iam:DeleteGroupPolicy",
+        "iam:DeletePolicy",
+        "iam:DeleteRole"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

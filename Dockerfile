@@ -1,14 +1,10 @@
-# Multi-stage Dockerfile for text-to-image difussion generation per HTTP API
-FROM python:3.10-slim
+FROM python:3.10-slim AS build
 
 WORKDIR /app
+
 ENV POETRY_HOME="/opt/poetry"
 ENV PATH="$POETRY_HOME/bin:$PATH"
 
-WORKDIR /app
-COPY src pyproject.toml poetry.lock ./
-COPY models ./models/
-COPY src ./src/
 COPY pyproject.toml poetry.lock ./
 
 RUN apt-get update && \
@@ -19,5 +15,17 @@ RUN apt-get update && \
     poetry config cache-dir /var/cache/pypoetry && \
     poetry install --no-root --no-interaction --no-ansi && \
     rm -rf /var/cache/pypoetry/*
+
+FROM python:3.10-slim AS production
+
+WORKDIR /app
+
+COPY --from=build /app /app
+
+#COPY models ./models/
+COPY src ./src/
+
+RUN apt-get purge -y --auto-remove build-essential curl && \
+    rm -rf /var/lib/apt/lists/*
 
 CMD ["poetry", "run", "python", "-m", "vae.api", "--host", "0.0.0.0", "--port", "8000"]
